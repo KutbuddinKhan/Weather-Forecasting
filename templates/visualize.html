@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather Visualization</h1>
+        {% if weather_data %}
+        <div class="weather-info">
+            <h2>Weather in {{ weather_data.city }}</h2>
+            <p>Temperature: {{ weather_data.temperature }}°C</p>
+            <p>Description: {{ weather_data.description }}</p>
+            <p>Wind Speed: {{ weather_data.wind_speed }} km/h</p>
+            <p>Humidity: {{ weather_data.humidity }}%</p>
+            <p>Sunrise: {{ weather_data.sunrise | datetimeformat }}</p>
+            <p>Sunset: {{ weather_data.sunset | datetimeformat }}</p>
+        </div>
+        <canvas id="weatherChart" width="800" height="375"></canvas>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const weatherData = JSON.parse('{{ weather_data | tojson | safe }}');
+                if (weatherData) {
+                    const ctx = document.getElementById('weatherChart').getContext('2d');
+                    const chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Temperature', 'Wind Speed', 'Humidity'],
+                            datasets: [{
+                                label: 'Weather Data',
+                                data: [weatherData.temperature, weatherData.wind_speed, weatherData.humidity],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.6)',
+                                    'rgba(54, 162, 235, 0.6)',
+                                    'rgba(75, 192, 192, 0.6)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(75, 192, 192, 1)'
+                                ],
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    labels: {
+                                        font: {
+                                            size: 14
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return tooltipItem.dataset.label + ': ' + tooltipItem.raw + ' units';
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 100,
+                                    title: {
+                                        display: true,
+                                        text: 'Value',
+                                        font: {
+                                            size: 16
+                                        }
+                                    },
+                                    ticks: {
+                                        font: {
+                                            size: 12
+                                        }
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Parameters',
+                                        font: {
+                                            size: 16
+                                        }
+                                    },
+                                    ticks: {
+                                        font: {
+                                            size: 12
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        </script>
+        {% endif %}
+    </div>
+</body>
+
+</html>

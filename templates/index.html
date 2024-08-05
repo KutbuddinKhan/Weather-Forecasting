@@ -22,6 +22,14 @@
             <p>Temperature: {{ weather_data.temperature }}°C</p>
             <p>Description: {{ weather_data.description }}</p>
             <p>Wind Speed: {{ weather_data.wind_speed }} km/h</p>
+            <p>Humidity: {{ weather_data.humidity }}%</p>
+            <p>Pressure: {{ weather_data.pressure }} hPa</p>
+            <p>Sunrise: {{ weather_data.sunrise | datetimeformat }}</p>
+            <p>Sunset: {{ weather_data.sunset | datetimeformat }}</p>
+            <form action="{{ url_for('visualize') }}" method="GET">
+                <input type="hidden" name="weather_data" value='{{ weather_data | tojson | safe }}'>
+                <button type="submit">Visualize</button>
+            </form>
         </div>
         {% endif %}
     </div>
