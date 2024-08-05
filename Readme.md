@@ -1,6 +1,6 @@
 # Weather Forecast
 
-This is a simple Python script that fetches weather data for a given city using the OpenWeatherMap API and displays the temperature and other weather information.
+This simple Python script fetches weather data for a given city using the OpenWeatherMap API and displays the temperature and other weather information.
 
 ## Prerequisites
 
@@ -32,13 +32,13 @@ To run this script, you need the following:
 
 The architectural flow of the Weather Forecast script can be described as follows:
 
-User initiates the script by running main.py from the command line.
+User initiates the script by running app.py from the command line.
 
 The script prompts the user to enter the name of the city for which they want to fetch the weather forecast.
 
 The user input is received and stored in a variable.
 
-The script makes a request to the OpenWeatherMap API, passing the city name and API key as parameters.
+The script requests the OpenWeatherMap API, passing the city name and API key as parameters.
 
 The API response is received, and the script parses the JSON data to extract the relevant weather information.
 
@@ -48,24 +48,4 @@ The script displays the weather data, including the city name, temperature in Ce
 
 The execution of the script ends.
 
-## Using Github Copilot
 
-This project utilizes GitHub Copilot, an AI-powered coding assistant. Here are a few scenarios where GitHub Copilot can be helpful:
-
-API Integration: GitHub Copilot assisted us in integrating external APIs, like OpenWeatherMap, by suggesting the necessary code snippets for making requests and handling responses.
-
-![ScreenShot of Copilot Recommendation](Screenshots/ss1.jpeg)
-Here you can see that github copilot is suggesting me the code snippet for integrating params to fetch data from API
-
-Helping in Coversion of Temperatures:
-![ScreenShot of Copilot Recommendation](Screenshots/ss2.jpeg)
-![ScreenShot of Copilot Recommendation](Screenshots/ss3.jpeg)
-![ScreenShot of Copilot Recommendation](Screenshots/ss4.jpeg)
-
-Helping in Exception Handling:
-![ScreenShot of Copilot Recommendation](Screenshots/ss5.jpeg)
-![ScreenShot of Copilot Recommendation](Screenshots/ss6.jpeg)
-
-## Final Output
-
-![ScreenShot of Final OutPut](Screenshots/Final%20Output.jpeg)
