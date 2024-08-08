@@ -41,16 +41,34 @@ def datetimeformat(value, format='%Y-%m-%d %H:%M:%S'):
 # Function to insert a city name into the database
 
 
+# def insert_city(city):
+#     connection = sqlite3.connect('weather_city.db')
+#     cursor = connection.cursor()
+#     cursor.execute('''
+#         INSERT INTO cities (city_name)
+#                    VALUES (?)
+#     ''',
+#                    (city,))
+#     connection.commit()
+#     connection.close()
+
 def insert_city(city):
-    connection = sqlite3.connect('weather_app.db')
+    connection = sqlite3.connect('weather_city.db')
     cursor = connection.cursor()
-    cursor.execute('''
-        INSERT INTO cities (city_name)
-                   VALUES (?)
-    ''',
-                   (city,))
-    connection.commit()
-    connection.close()
+    try:
+        cursor.execute('''
+            INSERT INTO cities (city_name)
+            VALUES (?)
+        ''', (city,))
+        connection.commit()
+        print(f"Inserted city: {city}")
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+    except Exception as e:
+        print(f"Exception: {e}")
+    finally:
+        connection.close()
+
 
 
 @app.route('/', methods=['GET', 'POST'])

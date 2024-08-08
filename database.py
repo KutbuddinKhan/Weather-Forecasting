@@ -1,7 +1,7 @@
 import sqlite3
 
 def create_table():
-    connection = sqlite3.connect('weather_app.db')
+    connection = sqlite3.connect('weather_city.db')
     cursor = connection.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS cities (
